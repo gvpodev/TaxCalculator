@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Globalization;
+using System.Text;
 namespace TaxesCalculator.Entities
 {
     public class Company : Person
@@ -16,13 +17,13 @@ namespace TaxesCalculator.Entities
 
         public override double TaxCalculator()
         {
-            if(Employees > 10)
+            if (Employees > 10)
             {
-                return AnualIncome * (14 / 100);
+                return AnualIncome * 0.14;
             }
             else
             {
-                return AnualIncome * (16 / 100);
+                return AnualIncome * 0.16;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Globalization;
+using System.Text;
 namespace TaxesCalculator.Entities
 {
     public class Individual : Person
@@ -16,28 +17,21 @@ namespace TaxesCalculator.Entities
 
         public override double TaxCalculator()
         {
-            if(AnualIncome <= 20000.00)
+            if(AnualIncome < 20000.00)
             {
-                if(HealthExpenditures > 0)
-                {
-                    return (AnualIncome * (15/100)) - (HealthExpenditures * (50 / 100));
-                }
-                else
-                {
-                    return AnualIncome * (15 / 100);
-                }
+                return (AnualIncome * 0.15) - (HealthExpenditures * 0.5);
             }
             else
             {
-                if(HealthExpenditures > 0)
-                {
-                    return (AnualIncome * (25 / 100)) - (HealthExpenditures * (50 / 100));
-                }
-                else
-                {
-                    return AnualIncome * (25 / 100);
-                }
+                return (AnualIncome * 0.25) - (HealthExpenditures * 0.5);
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Name + TaxCalculator().ToString("F2", CultureInfo.InvariantCulture));
+            return sb.ToString();
         }
     }
 }
